@@ -10,32 +10,61 @@ import SwiftUI
 @Observable
 class HomeScreenVM {
     var meals: [Meal] = []
+    var mealSelection: Meal?
     var error: String?
+    
+    func resetValues() {
+        withAnimation {
+            meals = []
+            mealSelection = nil
+            error = nil
+        }
+    }
 }
 
 struct HomeScreen: View {
     @State var vm = HomeScreenVM()
+    @State var isDetailPresented: Bool = false
+    let alphabet = (97...122).map({String(UnicodeScalar($0))})
     
     var body: some View {
         NavigationStack {
-            if let errorMessage = vm.error {
-                ContentUnavailableView(label: {
-                    Label("Network Error", systemImage: "network.slash")
-                }, description: {
-                    Text(errorMessage)
-                }, actions: {
-                    Button {
-                        Task {
-                            await getDesserts()
+            Group {
+                if let errorMessage = vm.error {
+                    ContentUnavailableView(label: {
+                        Label("Network Error", systemImage: "network.slash")
+                    }, description: {
+                        Text(errorMessage)
+                    }, actions: {
+                        Button {
+                            Task {
+                                await getDesserts()
+                            }
+                        } label: {
+                            Text("Retry")
                         }
-                    } label: {
-                        Text("Retry")
-                    }
-                })
-            } else {
-                ScrollView {
-                    ImageGrid
+                    })
+                } else {
+                    AlphabetSidebarViewWithDrag(listView: ScrollView {
+                        ImageGrid
+                    }.scrollIndicators(.hidden), lookup: { letter in
+                        vm.meals.first { $0.strMeal.prefix(1).lowercased() == letter }
+                    }, alphabetFiltered: alphabet.filter { letter in
+                        vm.meals.contains { $0.strMeal.prefix(1).lowercased() == letter }
+                    })
+                    //TODO: sometimes dragging on the alphabet sidebar while images are loading causes an image load failure
                 }
+            }
+            .navigationBarTitleDisplayMode(.large)
+            .navigationTitle("Daisy's Desserts")
+            .navigationDestination(isPresented: $isDetailPresented) {
+                VStack {
+                    Text("Hello World")
+                }
+            }
+            .refreshable {
+                vm.resetValues()
+                await getDesserts()
             }
         }
         .task {
@@ -48,7 +77,11 @@ struct HomeScreen: View {
         await Network.shared.getDesserts(completion: { result in
             switch result {
             case .success(let response):
-                vm.meals = response.meals
+                withAnimation {
+                    vm.meals = response.meals.sorted { meal1, meal2 in
+                        meal1.strMeal < meal2.strMeal
+                    }
+                }
             case .failure(let error):
                 withAnimation {
                     vm.error = error.localizedDescription
@@ -63,34 +96,67 @@ struct HomeScreen: View {
             GridItem(.adaptive(minimum: 150, maximum: 160))
         ], alignment: .center, spacing: 25) {
             ForEach(vm.meals, id: \.self) { meal in
-                ImageFromURL(url: meal.strMealThumb)
+                Button {
+                    isDetailPresented = true
+                } label: {
+                    MealItem(meal: meal)
+                }
+                .padding(.horizontal, 5)
             }
         }
         .frame(maxWidth: .infinity)
     }
 }
 
-struct ImageFromURL: View {
-    var url: String? = "https://hws.dev/paul3.jpg"
+struct MealItem: View {
+    @State var url: URL?
+    var meal: Meal?
+    let radius: CGFloat = 25
     
     var body: some View {
-        AsyncImage(url: URL(string: url ?? "")) { phase in
+        CacheAsyncImage(url: URL(string: meal?.strMealThumb ?? "" + "/preview")!, transaction: .init(animation: .default)) { phase in
             switch phase {
             case .failure:
-                RoundedRectangle(cornerRadius: 25)
-                    .overlay {
-                        Image(systemName: "photo")
-                            .font(.largeTitle)
-                    }
+                Placeholder {
+                    Image(systemName: "photo")
+                        .font(.largeTitle)
+                        .imageScale(.large)
+                }
             case .success(let image):
                 image
                     .resizable()
+                    .clipShape(.rect(cornerRadius: radius))
             default:
-                ProgressView()
+                Placeholder {
+                    ProgressView()
+                }
             }
         }
         .aspectRatio(contentMode: .fit)
-        .clipShape(.rect(cornerRadius: 25))
+        .overlay(alignment: .bottom) {
+            ZStack {
+                UnevenRoundedRectangle(topLeadingRadius: 0, bottomLeadingRadius: radius, bottomTrailingRadius: radius, topTrailingRadius: 0)
+                    .foregroundStyle(.thinMaterial)
+                    .frame(height: 50)
+                Text(meal?.strMeal ?? "")
+                    .lineLimit(2)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+        }
+    }
+}
+
+struct Placeholder<Content: View>: View {
+    @ViewBuilder let content: Content
+    let radius: CGFloat = 25
+    let halfGray: Color = .gray.opacity(0.5)
+    
+    var body: some View {
+        RoundedRectangle(cornerRadius: radius)
+            .foregroundStyle(halfGray)
+            .overlay {
+                content
+            }
     }
 }
 
