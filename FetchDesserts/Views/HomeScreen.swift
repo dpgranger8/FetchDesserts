@@ -39,7 +39,7 @@ struct HomeScreen: View {
                     }, actions: {
                         Button {
                             Task {
-                                await retryNetwork()
+                                await retryRequest()
                             }
                         } label: {
                             Text("Retry")
@@ -66,7 +66,7 @@ struct HomeScreen: View {
                 }
             }
             .refreshable {
-                await retryNetwork()
+                await retryRequest()
             }
         }
         .task {
@@ -74,7 +74,7 @@ struct HomeScreen: View {
         }
     }
     
-    func retryNetwork() async {
+    func retryRequest() async {
         vm.resetValues()
         await getDesserts()
     }
@@ -109,68 +109,11 @@ struct HomeScreen: View {
                 Button {
                     isDetailPresented = true
                 } label: {
-                    MealItem(meal: meal, isPreviewImage: true)
+                    MealItem(meal: meal)
                 }
             }
         }
         .frame(maxWidth: .infinity)
-    }
-}
-
-struct MealItem: View {
-    @Environment(\.colorScheme) var colorScheme
-    @State var url: URL?
-    var meal: Meal
-    var isPreviewImage: Bool
-    
-    var body: some View {
-        CacheAsyncImage(url: URL(string: meal.strMealThumb + (isPreviewImage ? "/preview" : ""))!, transaction: .init(animation: .default)) { phase in
-            switch phase {
-            case .failure:
-                Placeholder {
-                    Image(systemName: "photo")
-                        .font(.largeTitle)
-                        .imageScale(.large)
-                }
-            case .success(let image):
-                image
-                    .resizable()
-                    .clipShape(.rect(cornerRadius: Statics.rectangleRadius))
-            default:
-                Placeholder {
-                    ProgressView()
-                }
-            }
-        }
-        .aspectRatio(contentMode: .fit)
-        .overlay(alignment: .bottom) {
-            ZStack {
-                UnevenRoundedRectangle(topLeadingRadius: 0, bottomLeadingRadius: Statics.rectangleRadius, bottomTrailingRadius: Statics.rectangleRadius, topTrailingRadius: 0)
-                    .foregroundStyle(.thinMaterial)
-                    .frame(height: 50)
-                Text(meal.strMeal)
-                    .foregroundStyle(colorScheme == .dark ? .white : .black)
-                    .fontWeight(.semibold)
-                    .padding(.horizontal)
-                    .lineLimit(2)
-                    .fixedSize(horizontal: false, vertical: true)
-                    .scaledToFit()
-                    .minimumScaleFactor(0.7)
-            }
-            .offset(y: 10)
-        }
-    }
-}
-
-struct Placeholder<Content: View>: View {
-    @ViewBuilder let content: Content
-    
-    var body: some View {
-        RoundedRectangle(cornerRadius: Statics.rectangleRadius)
-            .foregroundStyle(Statics.halfGray)
-            .overlay {
-                content
-            }
     }
 }
 
