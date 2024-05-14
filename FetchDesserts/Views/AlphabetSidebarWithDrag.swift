@@ -14,13 +14,10 @@ struct AlphabetSidebarViewWithDrag<Content: View>: View {
     var listView: Content
     var lookup: (String) -> (any Hashable)?
     var alphabetFiltered: [String]
-//    var oppositeColorScheme: Color {
-//        colorScheme == .dark ? .white.opacity(0.7) : .black.opacity(0.7)
-//    }
     
     class IndexTitleState: ObservableObject {
         var currentTitleIndex = 0
-        var titleSize: CGSize = CGSize(width: 8.0, height: 13.333333333333332) //This is the letter size, so change this if you change the static font size below
+        var titleSize: CGSize = CGSize(width: 8.0, height: 13.333333333333332) //This is the letter size, so change this if you change the font size below
     }
     
     @StateObject var indexState = IndexTitleState()
@@ -43,8 +40,8 @@ struct AlphabetSidebarViewWithDrag<Content: View>: View {
                     ForEach(alphabetFiltered, id: \.self) { letter in
                         Text(letter.uppercased())
                             .foregroundStyle(.blue)
-                            .font(.caption) //set a letter size initialization value
-                            .padding(.trailing, 3)
+                            .font(.system(size: 11)) //set an unchanging letter size
+                            .padding(.trailing, 2)
                             .modifier(SizeModifier())
                             .onPreferenceChange(SizePreferenceKey.self) {
                                 self.indexState.titleSize = $0
@@ -97,17 +94,5 @@ struct SizePreferenceKey: PreferenceKey {
 
     static func reduce(value: inout CGSize, nextValue: () -> CGSize) {
         value = nextValue()
-    }
-}
-
-struct SizeModifier: ViewModifier {
-    private var sizeView: some View {
-        GeometryReader { geometry in
-            Color.clear.preference(key: SizePreferenceKey.self, value: geometry.size)
-        }
-    }
-
-    func body(content: Content) -> some View {
-        content.background(sizeView)
     }
 }

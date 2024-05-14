@@ -23,6 +23,10 @@ class HomeScreenVM {
 }
 
 struct HomeScreen: View {
+    init() {
+        UINavigationBar.appearance().largeTitleTextAttributes = [.font : UIFont(name: "SignPainter", size: 50)!]
+    }
+    
     @State var vm = HomeScreenVM()
     @State var isDetailPresented: Bool = false
     let alphabet = (97...122).map({String(UnicodeScalar($0))})
@@ -47,10 +51,10 @@ struct HomeScreen: View {
                     })
                 } else {
                     AlphabetSidebarViewWithDrag(listView: ScrollView {
-                        ImageGrid
-                            .padding(.top, spacing)
-                    }
-                    .scrollIndicators(.hidden), lookup: { letter in
+                        ItemGrid
+                            .padding(.vertical, spacing)
+                            .padding(.bottom, spacing)
+                    }.scrollIndicators(.hidden), lookup: { letter in
                         vm.meals.first { $0.strMeal.prefix(1).lowercased() == letter }
                     }, alphabetFiltered: alphabet.filter { letter in
                         vm.meals.contains { $0.strMeal.prefix(1).lowercased() == letter }
@@ -58,8 +62,9 @@ struct HomeScreen: View {
                     //TODO: sometimes dragging on the alphabet sidebar while images are loading causes an image load failure
                 }
             }
+            .background(.gray.opacity(0.15))
             .navigationBarTitleDisplayMode(.large)
-            .navigationTitle("Daisy's Desserts")
+            .navigationTitle("David's Desserts")
             .navigationDestination(isPresented: $isDetailPresented) {
                 VStack {
                     Text("Hello World")
@@ -100,11 +105,11 @@ struct HomeScreen: View {
     }
     
     @ViewBuilder
-    private var ImageGrid: some View {
+    private var ItemGrid: some View {
         LazyVGrid(columns: [
             GridItem(.adaptive(minimum: 150, maximum: 160), spacing: spacing),
             GridItem(.adaptive(minimum: 150, maximum: 160), spacing: spacing)
-        ], alignment: .center, spacing: spacing + 10) {
+        ], alignment: .center, spacing: spacing) {
             ForEach(vm.meals, id: \.self) { meal in
                 Button {
                     isDetailPresented = true

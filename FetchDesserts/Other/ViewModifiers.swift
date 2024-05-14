@@ -7,6 +7,19 @@
 
 import SwiftUI
 
+//Used for alphabet sidebar
+struct SizeModifier: ViewModifier {
+    private var sizeView: some View {
+        GeometryReader { geometry in
+            Color.clear.preference(key: SizePreferenceKey.self, value: geometry.size)
+        }
+    }
+
+    func body(content: Content) -> some View {
+        content.background(sizeView)
+    }
+}
+
 /// From https://stackoverflow.com/a/64495887
 struct DidLoadViewModifier: ViewModifier {
     
