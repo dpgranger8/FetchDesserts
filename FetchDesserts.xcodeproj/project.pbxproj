@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		7E4C550C2BF4073A0061A11E /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4C550B2BF4073A0061A11E /* Models.swift */; };
+		7E4C550E2BF4083D0061A11E /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4C550D2BF4083D0061A11E /* View+Extensions.swift */; };
+		7E4C55102BF408430061A11E /* UICoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4C550F2BF408430061A11E /* UICoordinator.swift */; };
+		7E4C55142BF408630061A11E /* Detail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4C55112BF408620061A11E /* Detail.swift */; };
+		7E4C55152BF408630061A11E /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4C55122BF408620061A11E /* Home.swift */; };
+		7E4C55162BF408630061A11E /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4C55132BF408630061A11E /* ImageView.swift */; };
+		7E4C55182BF408680061A11E /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4C55172BF408680061A11E /* Item.swift */; };
 		7E9482F32BF2738C00113722 /* FetchDessertsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9482F22BF2738C00113722 /* FetchDessertsApp.swift */; };
 		7E9482F72BF2738E00113722 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E9482F62BF2738E00113722 /* Assets.xcassets */; };
 		7E9482FA2BF2738E00113722 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E9482F92BF2738E00113722 /* Preview Assets.xcassets */; };
@@ -22,6 +28,12 @@
 
 /* Begin PBXFileReference section */
 		7E4C550B2BF4073A0061A11E /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		7E4C550D2BF4083D0061A11E /* View+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
+		7E4C550F2BF408430061A11E /* UICoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UICoordinator.swift; sourceTree = "<group>"; };
+		7E4C55112BF408620061A11E /* Detail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Detail.swift; sourceTree = "<group>"; };
+		7E4C55122BF408620061A11E /* Home.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
+		7E4C55132BF408630061A11E /* ImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
+		7E4C55172BF408680061A11E /* Item.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		7E9482EF2BF2738C00113722 /* FetchDesserts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FetchDesserts.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E9482F22BF2738C00113722 /* FetchDessertsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchDessertsApp.swift; sourceTree = "<group>"; };
 		7E9482F62BF2738E00113722 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -66,10 +78,10 @@
 			isa = PBXGroup;
 			children = (
 				7E9482F22BF2738C00113722 /* FetchDessertsApp.swift */,
+				7E9483172BF32CFA00113722 /* Kavsoft Pinterest Grid */,
 				7E9483132BF32B2800113722 /* Network */,
 				7E9483142BF32B3600113722 /* Other */,
 				7E9483122BF32AF300113722 /* Views */,
-				7E9483172BF32CFA00113722 /* Kavsoft Pinterest Grid */,
 				7E9482F62BF2738E00113722 /* Assets.xcassets */,
 				7E9482F82BF2738E00113722 /* Preview Content */,
 			);
@@ -116,6 +128,12 @@
 		7E9483172BF32CFA00113722 /* Kavsoft Pinterest Grid */ = {
 			isa = PBXGroup;
 			children = (
+				7E4C550D2BF4083D0061A11E /* View+Extensions.swift */,
+				7E4C550F2BF408430061A11E /* UICoordinator.swift */,
+				7E4C55112BF408620061A11E /* Detail.swift */,
+				7E4C55122BF408620061A11E /* Home.swift */,
+				7E4C55132BF408630061A11E /* ImageView.swift */,
+				7E4C55172BF408680061A11E /* Item.swift */,
 			);
 			path = "Kavsoft Pinterest Grid";
 			sourceTree = "<group>";
@@ -192,12 +210,18 @@
 			files = (
 				7E9483072BF2F87700113722 /* ViewModifiers.swift in Sources */,
 				7E94830F2BF3158900113722 /* Statics.swift in Sources */,
+				7E4C55142BF408630061A11E /* Detail.swift in Sources */,
 				7E9483032BF277CB00113722 /* HomeScreen.swift in Sources */,
 				7E9483052BF2EB1D00113722 /* AlphabetSidebarWithDrag.swift in Sources */,
 				7E9482F32BF2738C00113722 /* FetchDessertsApp.swift in Sources */,
+				7E4C55152BF408630061A11E /* Home.swift in Sources */,
 				7E9483012BF273F000113722 /* Network.swift in Sources */,
 				7E4C550C2BF4073A0061A11E /* Models.swift in Sources */,
 				7E9483092BF30C4300113722 /* CacheAsyncImage.swift in Sources */,
+				7E4C55182BF408680061A11E /* Item.swift in Sources */,
+				7E4C550E2BF4083D0061A11E /* View+Extensions.swift in Sources */,
+				7E4C55102BF408430061A11E /* UICoordinator.swift in Sources */,
+				7E4C55162BF408630061A11E /* ImageView.swift in Sources */,
 				7E9483112BF32AB100113722 /* MealItem.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
