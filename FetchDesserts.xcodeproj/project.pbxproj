@@ -15,6 +15,7 @@
 		7E9483052BF2EB1D00113722 /* AlphabetSidebarWithDrag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9483042BF2EB1C00113722 /* AlphabetSidebarWithDrag.swift */; };
 		7E9483072BF2F87700113722 /* ViewModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9483062BF2F87700113722 /* ViewModifiers.swift */; };
 		7E9483092BF30C4300113722 /* CacheAsyncImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9483082BF30C4300113722 /* CacheAsyncImage.swift */; };
+		7E94830F2BF3158900113722 /* Statics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E94830E2BF3158900113722 /* Statics.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,7 @@
 		7E9483042BF2EB1C00113722 /* AlphabetSidebarWithDrag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlphabetSidebarWithDrag.swift; sourceTree = "<group>"; };
 		7E9483062BF2F87700113722 /* ViewModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModifiers.swift; sourceTree = "<group>"; };
 		7E9483082BF30C4300113722 /* CacheAsyncImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheAsyncImage.swift; sourceTree = "<group>"; };
+		7E94830E2BF3158900113722 /* Statics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Statics.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +66,7 @@
 				7E9483082BF30C4300113722 /* CacheAsyncImage.swift */,
 				7E9483022BF277CB00113722 /* HomeScreen.swift */,
 				7E9483002BF273F000113722 /* Network.swift */,
+				7E94830E2BF3158900113722 /* Statics.swift */,
 				7E9483062BF2F87700113722 /* ViewModifiers.swift */,
 				7E9482F62BF2738E00113722 /* Assets.xcassets */,
 				7E9482F82BF2738E00113722 /* Preview Content */,
@@ -150,6 +153,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7E9483072BF2F87700113722 /* ViewModifiers.swift in Sources */,
+				7E94830F2BF3158900113722 /* Statics.swift in Sources */,
 				7E9483032BF277CB00113722 /* HomeScreen.swift in Sources */,
 				7E9483052BF2EB1D00113722 /* AlphabetSidebarWithDrag.swift in Sources */,
 				7E9482F32BF2738C00113722 /* FetchDessertsApp.swift in Sources */,
