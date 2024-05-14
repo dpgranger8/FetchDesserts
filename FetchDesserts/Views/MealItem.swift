@@ -9,10 +9,11 @@ import SwiftUI
 
 struct MealItem: View {
     var meal: Meal
+    var isPreview: Bool
     
     var body: some View {
         VStack(spacing: 2) {
-            CacheAsyncImage(url: URL(string: meal.strMealThumb + "/preview")!, transaction: .init(animation: .default)) { phase in
+            CacheAsyncImage(url: URL(string: meal.strMealThumb + (isPreview ? "/preview" : ""))!, transaction: .init(animation: .default)) { phase in
                 switch phase {
                 case .failure:
                     Placeholder {

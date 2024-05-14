@@ -32,7 +32,7 @@ struct Detail: View {
             let detailHeight: CGFloat = rect.height * scale
             let scrollContentHeight: CGFloat = size.height - detailHeight
             
-            if let image = coordinator.animationLayer, let post = coordinator.selectedItem {
+            if let image = coordinator.animationLayer, let meal = coordinator.selectedMeal {
                 if !hideLayer {
                     Image(uiImage: image)
                         .scaleEffect(animateView ? scale : 1, anchor: .init(x: anchorX, y: 0))
@@ -67,7 +67,7 @@ struct Detail: View {
                 }
                 
                 /// Hero Kinda View
-                ImageView(post: post)
+                MealItem(meal: meal, isPreview: false)
                     .allowsHitTesting(false)
                     .frame(
                         width: animateView ? size.width : rect.width,
@@ -75,7 +75,7 @@ struct Detail: View {
                     )
                     .clipShape(.rect(cornerRadius: animateView ? 0 : 10))
                     .overlay(alignment: .top, content: {
-                        HeaderActions(post)
+                        HeaderActions(meal)
                             .offset(y: coordinator.headerOffset)
                             .padding(.top, safeArea.top)
                     })
@@ -90,17 +90,17 @@ struct Detail: View {
     @ViewBuilder
     func ScrollContent() -> some View {
         /// YOUR SCROLL CONTENT
-        DummyContent()
+        Text("Hello world")
     }
     
     /// Header Actions
     @ViewBuilder
-    func HeaderActions(_ post: Item) -> some View {
+    func HeaderActions(_ meal: Meal) -> some View {
         HStack {
             Spacer(minLength: 0)
             
             if coordinator.hideLayer {
-                Button(action: { coordinator.toogleView(show: false, frame: .zero, post: post) }, label: {
+                Button(action: { coordinator.toogleView(show: false, frame: .zero, meal: meal) }, label: {
                     Image(systemName: "xmark.circle.fill")
                         .font(.title)
                         .foregroundStyle(Color.primary, .bar)
@@ -114,6 +114,30 @@ struct Detail: View {
     }
 }
 
-#Preview {
-    ContentView()
+//MARK: End of Balaji code and start of my code
+
+struct MealItemImage: View {
+    var mealThumbnail: String
+    
+    var body: some View {
+        CacheAsyncImage(url: URL(string: mealThumbnail)!, transaction: .init(animation: .default)) { phase in
+            switch phase {
+            case .failure:
+                Placeholder {
+                    Image(systemName: "photo")
+                        .font(.largeTitle)
+                        .imageScale(.large)
+                        .scaleEffect(1.5)
+                }
+            case .success(let image):
+                image
+                    .resizable()
+            default:
+                Placeholder {
+                    ProgressView()
+                }
+            }
+        }
+        .aspectRatio(contentMode: .fit)
+    }
 }

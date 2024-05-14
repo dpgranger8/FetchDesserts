@@ -12,7 +12,7 @@ class UICoordinator {
     /// Shared View Properties between Home and Detail View
     var scrollView: UIScrollView = .init(frame: .zero)
     var rect: CGRect = .zero
-    var selectedItem: Item?
+    var selectedMeal: Meal?
     /// Animation Layer Properties
     var animationLayer: UIImage?
     var animateView: Bool = false
@@ -31,9 +31,9 @@ class UICoordinator {
         animationLayer = image
     }
     
-    func toogleView(show: Bool, frame: CGRect, post: Item) {
+    func toogleView(show: Bool, frame: CGRect, meal: Meal) {
         if show {
-            selectedItem = post
+            selectedMeal = meal
             /// Storing View's Rect
             rect = frame
             /// Generating Scrollview's Visible area Snapshot
@@ -61,7 +61,7 @@ class UICoordinator {
     
     private func resetAnimationProperties() {
         headerOffset = 0
-        selectedItem = nil
+        selectedMeal = nil
         animationLayer = nil
         hideRootView = false
     }

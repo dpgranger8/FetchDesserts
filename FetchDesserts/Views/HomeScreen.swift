@@ -114,7 +114,7 @@ struct HomeScreen: View {
                 Button {
                     isDetailPresented = true
                 } label: {
-                    MealItem(meal: meal)
+                    MealItem(meal: meal, isPreview: true)
                 }
             }
         }
