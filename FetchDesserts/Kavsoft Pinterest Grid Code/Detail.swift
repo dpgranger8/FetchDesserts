@@ -29,7 +29,7 @@ struct Detail: View {
             /// let offsetX = animateView && anchorX != 0.5 ? (anchorX > 0.5 ? 15 : -15) * scale : 0
             let offsetY = animateView ? -coordinator.rect.minY * scale : 0
             
-            let detailHeight: CGFloat = rect.height * scale
+            let detailHeight: CGFloat = (rect.width * scale) + 45
             let scrollContentHeight: CGFloat = size.height - detailHeight
             
             if let image = coordinator.animationLayer, let meal = coordinator.selectedMeal {
@@ -111,33 +111,5 @@ struct Detail: View {
             }
         }
         .animation(.easeInOut(duration: 0.3), value: coordinator.hideLayer)
-    }
-}
-
-//MARK: End of Balaji code and start of my code
-
-struct MealItemImage: View {
-    var mealThumbnail: String
-    
-    var body: some View {
-        CacheAsyncImage(url: URL(string: mealThumbnail)!, transaction: .init(animation: .default)) { phase in
-            switch phase {
-            case .failure:
-                Placeholder {
-                    Image(systemName: "photo")
-                        .font(.largeTitle)
-                        .imageScale(.large)
-                        .scaleEffect(1.5)
-                }
-            case .success(let image):
-                image
-                    .resizable()
-            default:
-                Placeholder {
-                    ProgressView()
-                }
-            }
-        }
-        .aspectRatio(contentMode: .fit)
     }
 }

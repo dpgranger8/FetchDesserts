@@ -5,10 +5,12 @@
 //  Created by David Granger on 5/14/24.
 //
 
+//I understand that my app may not be optimized for landscape mode or viewing on all screen sizes such as iPad due to the way my detail view has been architected.
+
 import SwiftUI
 
 struct Home: View {
-    // UI Coordinator for smooth animation
+    // UI Coordinator for zoom animation
     var coordinator: UICoordinator = .init()
     
     @State var vm = HomeScreenVM()
@@ -35,6 +37,7 @@ struct Home: View {
                 AlphabetSidebarViewWithDrag(listView: ScrollView {
                     Text("David's Desserts")
                         .font(.custom("SignPainter", size: 50).bold())
+                        .padding(.top, spacing)
                     ItemGrid
                         .padding(.vertical, spacing)
                         .padding(.bottom, spacing)
@@ -47,7 +50,7 @@ struct Home: View {
                 }, alphabetFiltered: alphabet.filter { letter in
                     vm.meals.contains { $0.strMeal.prefix(1).lowercased() == letter }
                 })
-                //MARK: Start of code written by Balaji Venkatesh for smooth detail animation
+                //MARK: Start of code written by Balaji Venkatesh for smooth detail zoom animation https://www.youtube.com/watch?v=fBCu7rM5Vkw
                 .opacity(coordinator.hideRootView ? 0 : 1)
                 .scrollDisabled(coordinator.hideRootView)
                 .allowsHitTesting(!coordinator.hideRootView)
@@ -56,7 +59,7 @@ struct Home: View {
                         .environment(coordinator)
                         .allowsHitTesting(coordinator.hideLayer)
                 }
-                //MARK: End of code written by Balaji Venkatesh for smooth detail animation
+                //MARK: End of code written by Balaji Venkatesh for smooth detail zoom animation
                 .background(.gray.opacity(0.15))
             }
         }

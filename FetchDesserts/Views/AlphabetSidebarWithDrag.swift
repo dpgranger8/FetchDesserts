@@ -40,7 +40,7 @@ struct AlphabetSidebarViewWithDrag<Content: View>: View {
                     ForEach(alphabetFiltered, id: \.self) { letter in
                         Text(letter.uppercased())
                             .foregroundStyle(.blue)
-                            .font(.system(size: 11)) //set an unchanging letter size
+                            .font(.system(size: 11)) //set a constant font size
                             .padding(.trailing, 2)
                             .modifier(SizeModifier())
                             .onPreferenceChange(SizePreferenceKey.self) {

@@ -25,7 +25,7 @@ struct MealItem: View {
                 case .success(let image):
                     image
                         .resizable()
-                        .clipShape(UnevenRoundedRectangle(topLeadingRadius: Statics.rectangleRadius, bottomLeadingRadius: 0, bottomTrailingRadius: 0, topTrailingRadius: Statics.rectangleRadius))
+                        .clipShape(UnevenRoundedRectangle(topLeadingRadius: (isPreview ? Statics.rectangleRadius : 0), bottomLeadingRadius: 0, bottomTrailingRadius: 0, topTrailingRadius: (isPreview ? Statics.rectangleRadius : 0)))
                 default:
                     Placeholder {
                         ProgressView()
@@ -34,6 +34,7 @@ struct MealItem: View {
             }
             .aspectRatio(contentMode: .fit)
             BottomBar
+                .if(!isPreview) {$0.hidden()}
         }
     }
     

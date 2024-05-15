@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-//Used for alphabet sidebar
+// Preference Key used for alphabet sidebar
 struct SizeModifier: ViewModifier {
     private var sizeView: some View {
         GeometryReader { geometry in
@@ -54,4 +54,16 @@ extension View {
         modifier(DidLoadViewModifier(perform: action))
     }
     
+}
+
+// Conditional view modifier that toggles view modifiers on or off as needed
+public extension View {
+    @ViewBuilder
+    func `if`<Transform: View>(_ condition: Bool, transform: (Self) -> Transform) -> some View {
+        if condition {
+            transform(self)
+        } else {
+            self
+        }
+    }
 }
