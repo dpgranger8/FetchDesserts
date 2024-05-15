@@ -5,7 +5,7 @@
 //  Created by David Granger on 5/14/24.
 //
 
-//I understand that my app may not be optimized for landscape mode or viewing on all screen sizes such as iPad due to the way my detail view has been architected.
+// I am aware that my app may not be optimized for landscape mode or viewing on all screen sizes such as iPad due to the way my detail view has been architected
 
 import SwiftUI
 
@@ -13,30 +13,24 @@ struct Home: View {
     // UI Coordinator for zoom animation
     var coordinator: UICoordinator = .init()
     
+    //MARK: Properties
     @State var vm = HomeScreenVM()
     let alphabet = (97...122).map({String(UnicodeScalar($0))})
     let spacing: CGFloat = 20
     
+    //MARK: UI
     var body: some View {
         Group {
             if let errorMessage = vm.error {
-                ContentUnavailableView(label: {
-                    Label("Network Error", systemImage: "network.slash")
-                }, description: {
-                    Text(errorMessage)
-                }, actions: {
-                    Button {
-                        Task {
-                            await retryRequest()
-                        }
-                    } label: {
-                        Text("Retry")
+                UnavailableView(message: errorMessage) {
+                    Task {
+                        await getDesserts()
                     }
-                })
+                }
             } else {
                 AlphabetSidebarViewWithDrag(listView: ScrollView {
-                    Text("David's Desserts")
-                        .font(.custom("SignPainter", size: 50).bold())
+                    Text("Dave's Desserts")
+                        .font(.custom("SignPainter", size: 60).bold())
                         .padding(.top, spacing)
                     ItemGrid
                         .padding(.vertical, spacing)
@@ -64,18 +58,14 @@ struct Home: View {
             }
         }
         .refreshable {
-            await retryRequest()
+            await getDesserts()
         }
         .task {
             await getDesserts()
         }
     }
     
-    func retryRequest() async {
-        vm.resetValues()
-        await getDesserts()
-    }
-    
+    //MARK: Functions
     func getDesserts() async {
         vm.error = nil
         await Network.shared.getDesserts(completion: { result in
@@ -96,6 +86,7 @@ struct Home: View {
         })
     }
     
+    //MARK: Subviews
     @ViewBuilder
     private var ItemGrid: some View {
         LazyVGrid(columns: [

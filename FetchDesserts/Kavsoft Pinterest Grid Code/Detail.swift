@@ -67,6 +67,7 @@ struct Detail: View {
                 }
                 
                 /// Hero Kinda View
+                //MARK: I spliced my MealItem view here to make zoom animation work
                 MealItem(meal: meal, isPreview: false)
                     .allowsHitTesting(false)
                     .frame(
@@ -90,7 +91,10 @@ struct Detail: View {
     @ViewBuilder
     func ScrollContent() -> some View {
         /// YOUR SCROLL CONTENT
-        Text("Hello world")
+        //MARK: I spliced my detail scroll view here
+        if let meal = coordinator.selectedMeal {
+            MealDetailScrollContent(meal: meal)
+        }
     }
     
     /// Header Actions

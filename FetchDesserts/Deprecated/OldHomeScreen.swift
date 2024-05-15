@@ -7,21 +7,6 @@
 
 import SwiftUI
 
-@Observable
-class HomeScreenVM {
-    var meals: [Meal] = []
-    var mealSelection: Meal?
-    var error: String?
-    
-    func resetValues() {
-        withAnimation {
-            meals = []
-            mealSelection = nil
-            error = nil
-        }
-    }
-}
-
 struct HomeScreen: View {
     init() {
         UINavigationBar.appearance().largeTitleTextAttributes = [.font : UIFont(name: "SignPainter", size: 50)!]
@@ -64,7 +49,7 @@ struct HomeScreen: View {
             }
             .background(.gray.opacity(0.15))
             .navigationBarTitleDisplayMode(.large)
-            .navigationTitle("David's Desserts")
+            .navigationTitle("Dave's Desserts")
             .navigationDestination(isPresented: $isDetailPresented) {
                 VStack {
                     Text("Hello World")
