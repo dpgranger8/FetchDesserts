@@ -67,15 +67,14 @@ public extension View {
         }
     }
     
-    func headerStyle() -> some View {
-        self.modifier(HeaderMod())
+    func signPainter() -> some View {
+        self.modifier(SignPainterFont())
     }
 }
 
-struct HeaderMod: ViewModifier {
+struct SignPainterFont: ViewModifier {
     func body(content: Content) -> some View {
         content
-            .font(.title.bold())
-            .padding(.bottom, 10)
+            .font(.custom("SignPainter", size: 60).bold())
     }
 }

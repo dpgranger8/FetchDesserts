@@ -79,28 +79,35 @@ struct MealDetailScrollContent: View {
     }
     
     @ViewBuilder
+    func Header(_ text: String) -> some View {
+        Text(text.uppercased())
+            .font(.headline)
+            .fontWeight(.heavy)
+            .padding(.bottom, 10)
+            .padding(.top, 15)
+    }
+    
+    @ViewBuilder
     private var Instructions: some View {
         if let instructions = vm.mealDetail?.strInstructions {
-            Text("Directions")
-                .headerStyle()
-            Text(instructions.replacingOccurrences(of: "\n", with: "\n\n"))
+            Header("Directions")
+            Text(instructions)
         }
     }
     
     @ViewBuilder
     private var RecipeTable: some View {
         if let items = vm.mealDetail?.ingredientsAndMeasures() {
-            Text("Ingredients")
-                .headerStyle()
+            Header("Ingredients")
             VStack(spacing: 0) {
                 HStack(alignment: .top) {
-                    Text("Ingredient")
+                    Text("INGREDIENT")
                     Spacer()
-                    Text("Amount")
+                    Text("AMOUNT")
                 }
                 .padding(.bottom, 5)
                 .font(.caption2)
-                .bold()
+                .fontWeight(.semibold)
                 ForEach(items.indices, id: \.self) { index in
                     ZStack {
                         if index % 2 == 0 {
@@ -110,11 +117,10 @@ struct MealDetailScrollContent: View {
                         }
                         HStack {
                             Text(items[index].ingredient)
-                                .font(.subheadline)
                             Spacer()
                             Text(items[index].measure)
-                                .font(.subheadline)
                         }
+                        .font(.subheadline)
                     }
                     .frame(height: 30)
                 }

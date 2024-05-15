@@ -66,7 +66,9 @@ struct Home: View {
     
     //MARK: Functions
     func getDesserts() async {
-        vm.error = nil
+        withAnimation {
+            vm.resetValues()
+        }
         await Network.shared.getDesserts(completion: { result in
             switch result {
             case .success(let response):

@@ -12,4 +12,10 @@ class HomeScreenVM {
     var meals: [Meal] = []
     var mealSelection: Meal?
     var error: String?
+    
+    func resetValues() {
+        meals = []
+        mealSelection = nil
+        error = nil
+    }
 }
