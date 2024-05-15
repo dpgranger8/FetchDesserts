@@ -28,10 +28,16 @@ struct MealDetailScrollContent: View {
                     }
                 }
             } else {
-                VStack {
+                LazyVStack(alignment: .leading) {
                     TitleHeader
-                    RecipeTable
+                        .padding(.bottom, spacing / 2)
+                    Group {
+                        RecipeTable
+                        Instructions
+                    }
+                    .padding(.horizontal, spacing)
                 }
+                .padding(.bottom, spacing * 4)
             }
         }
         .background(specialBackground)
@@ -73,13 +79,24 @@ struct MealDetailScrollContent: View {
     }
     
     @ViewBuilder
+    private var Instructions: some View {
+        if let instructions = vm.mealDetail?.strInstructions {
+            Text("Directions")
+                .headerStyle()
+            Text(instructions.replacingOccurrences(of: "\n", with: "\n\n"))
+        }
+    }
+    
+    @ViewBuilder
     private var RecipeTable: some View {
         if let items = vm.mealDetail?.ingredientsAndMeasures() {
+            Text("Ingredients")
+                .headerStyle()
             VStack(spacing: 0) {
                 HStack(alignment: .top) {
                     Text("Ingredient")
                     Spacer()
-                    Text("Measure")
+                    Text("Amount")
                 }
                 .padding(.bottom, 5)
                 .font(.caption2)
@@ -108,8 +125,7 @@ struct MealDetailScrollContent: View {
                 RoundedRectangle(cornerRadius: Statics.rectangleRadius / 2)
                     .fill(.quinary)
             }
-            .padding([.horizontal, .vertical], spacing)
-            .padding(.bottom, 5)
+            .padding(.bottom, spacing / 2)
         }
     }
 }

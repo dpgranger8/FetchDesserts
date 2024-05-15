@@ -66,4 +66,16 @@ public extension View {
             self
         }
     }
+    
+    func headerStyle() -> some View {
+        self.modifier(HeaderMod())
+    }
+}
+
+struct HeaderMod: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .font(.title.bold())
+            .padding(.bottom, 10)
+    }
 }
