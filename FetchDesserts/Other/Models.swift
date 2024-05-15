@@ -68,3 +68,41 @@ struct MealDetail: Codable {
     let strMeasure20: String
     let strSource: String
 }
+
+extension MealDetail {
+    func ingredientsList() -> [String] {
+        return propertiesList(prefix: "strIngredient")
+    }
+    
+    func measuresList() -> [String] {
+        return propertiesList(prefix: "strMeasure")
+    }
+    
+    private func propertiesList(prefix: String) -> [String] {
+        let mirror = Mirror(reflecting: self)
+        // Filter properties by prefix and ensure they're non-empty strings
+        let filteredProperties = mirror.children.compactMap { (label: String?, value: Any) -> String? in
+            guard let label = label, label.hasPrefix(prefix), let value = value as? String, !value.trimmingCharacters(in: .whitespaces).isEmpty else {
+                return nil
+            }
+            return value
+        }
+        
+        return filteredProperties
+    }
+    
+    //zip pairs array for easy use
+    func ingredientsAndMeasures() -> [IngredientPair] {
+        let ingredients = ingredientsList()
+        let measures = measuresList()
+        
+        let pairedList = zip(ingredients, measures).map { IngredientPair(ingredient: $0, measure: $1) }
+        return pairedList
+    }
+}
+
+struct IngredientPair: Identifiable, Equatable {
+    var id: String { ingredient }
+    let ingredient: String
+    let measure: String
+}

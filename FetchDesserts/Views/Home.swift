@@ -33,8 +33,7 @@ struct Home: View {
                         .font(.custom("SignPainter", size: 60).bold())
                         .padding(.top, spacing)
                     ItemGrid
-                        .padding(.vertical, spacing)
-                        .padding(.bottom, spacing)
+                        .padding([.vertical, .bottom], spacing)
                         .background(ScrollViewExtractor {
                             coordinator.scrollView = $0
                         })
@@ -54,7 +53,7 @@ struct Home: View {
                         .allowsHitTesting(coordinator.hideLayer)
                 }
                 //MARK: End of code written by Balaji Venkatesh for smooth detail zoom animation
-                .background(.gray.opacity(0.15))
+                .background(Statics.backgroundGray)
             }
         }
         .refreshable {
