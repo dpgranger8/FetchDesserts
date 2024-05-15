@@ -91,17 +91,17 @@ extension MealDetail {
         return filteredProperties
     }
     
-    //zip pairs array for easy use
-    func ingredientsAndMeasures() -> [IngredientPair] {
+    //zip recipe pair into an array for easy use
+    func ingredientsAndMeasures() -> [RecipePair] {
         let ingredients = ingredientsList()
         let measures = measuresList()
         
-        let pairedList = zip(ingredients, measures).map { IngredientPair(ingredient: $0, measure: $1) }
+        let pairedList = zip(ingredients, measures).map { RecipePair(ingredient: $0, measure: $1) }
         return pairedList
     }
 }
 
-struct IngredientPair: Identifiable, Equatable {
+struct RecipePair: Identifiable, Equatable {
     var id: String { ingredient }
     let ingredient: String
     let measure: String

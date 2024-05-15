@@ -61,7 +61,7 @@ struct Placeholder<Content: View>: View {
     
     var body: some View {
         UnevenRoundedRectangle(topLeadingRadius: Statics.rectangleRadius, bottomLeadingRadius: 0, bottomTrailingRadius: 0, topTrailingRadius: Statics.rectangleRadius)
-            .foregroundStyle(Statics.halfGray)
+            .foregroundStyle(Statics.backgroundGray)
             .overlay {
                 content
             }

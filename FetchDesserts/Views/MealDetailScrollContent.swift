@@ -8,17 +8,17 @@
 import SwiftUI
 
 struct MealDetailScrollContent: View {
+    //MARK: Properties
     @Environment(\.colorScheme) var colorScheme
     var meal: Meal
     @State var vm = MealDetailVM()
     let spacing: CGFloat = 15
-    
     var specialBackground: Color {
         colorScheme == .dark ? Statics.backgroundGray : Color(uiColor: .systemGroupedBackground)
     }
-    
     let lightBlue: Color = .blue.opacity(0.2)
     
+    //MARK: UI
     var body: some View {
         VStack {
             if let errorMessage = vm.error {
@@ -57,6 +57,7 @@ struct MealDetailScrollContent: View {
         })
     }
     
+    //MARK: Subviews
     @ViewBuilder
     private var TitleHeader: some View {
         ZStack {
