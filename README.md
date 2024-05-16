@@ -1,7 +1,7 @@
 
 # Dave's Desserts
 
-Fetch.com coding challenge solution in SwiftUI. It allows users to browse dessert recipes and watch how each dessert is made.
+Fetch.com coding challenge solution in SwiftUI. It allows users to browse dessert recipes and learn how each dessert is made.
 
 
 ## Features
