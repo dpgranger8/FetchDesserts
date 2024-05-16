@@ -86,6 +86,7 @@
 		7E9482E62BF2738C00113722 = {
 			isa = PBXGroup;
 			children = (
+				7E7442B72BF5ABEA002A748C /* README.md */,
 				7E9482F12BF2738C00113722 /* FetchDesserts */,
 				7E9482F02BF2738C00113722 /* Products */,
 			);
@@ -102,7 +103,6 @@
 		7E9482F12BF2738C00113722 /* FetchDesserts */ = {
 			isa = PBXGroup;
 			children = (
-				7E7442B72BF5ABEA002A748C /* README.md */,
 				7E9482F22BF2738C00113722 /* FetchDessertsApp.swift */,
 				7E4C551B2BF436820061A11E /* Deprecated */,
 				7E9483172BF32CFA00113722 /* Kavsoft Pinterest Grid Code */,
