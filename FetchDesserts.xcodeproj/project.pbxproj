@@ -17,6 +17,7 @@
 		7E4C55222BF43FA90061A11E /* MealDetailVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4C55212BF43FA90061A11E /* MealDetailVM.swift */; };
 		7E4C55242BF442300061A11E /* UnavailableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4C55232BF442300061A11E /* UnavailableView.swift */; };
 		7E7442B62BF568E2002A748C /* YouTubePlayerKit in Frameworks */ = {isa = PBXBuildFile; productRef = 7E7442B52BF568E2002A748C /* YouTubePlayerKit */; };
+		7E7442B82BF5ABEA002A748C /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 7E7442B72BF5ABEA002A748C /* README.md */; };
 		7E9482F32BF2738C00113722 /* FetchDessertsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9482F22BF2738C00113722 /* FetchDessertsApp.swift */; };
 		7E9482F72BF2738E00113722 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E9482F62BF2738E00113722 /* Assets.xcassets */; };
 		7E9482FA2BF2738E00113722 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E9482F92BF2738E00113722 /* Preview Assets.xcassets */; };
@@ -39,6 +40,7 @@
 		7E4C551E2BF43C300061A11E /* MealDetailScrollContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealDetailScrollContent.swift; sourceTree = "<group>"; };
 		7E4C55212BF43FA90061A11E /* MealDetailVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealDetailVM.swift; sourceTree = "<group>"; };
 		7E4C55232BF442300061A11E /* UnavailableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnavailableView.swift; sourceTree = "<group>"; };
+		7E7442B72BF5ABEA002A748C /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		7E9482EF2BF2738C00113722 /* FetchDesserts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FetchDesserts.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E9482F22BF2738C00113722 /* FetchDessertsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchDessertsApp.swift; sourceTree = "<group>"; };
 		7E9482F62BF2738E00113722 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -100,6 +102,7 @@
 		7E9482F12BF2738C00113722 /* FetchDesserts */ = {
 			isa = PBXGroup;
 			children = (
+				7E7442B72BF5ABEA002A748C /* README.md */,
 				7E9482F22BF2738C00113722 /* FetchDessertsApp.swift */,
 				7E4C551B2BF436820061A11E /* Deprecated */,
 				7E9483172BF32CFA00113722 /* Kavsoft Pinterest Grid Code */,
@@ -226,6 +229,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7E7442B82BF5ABEA002A748C /* README.md in Resources */,
 				7E9482FA2BF2738E00113722 /* Preview Assets.xcassets in Resources */,
 				7E9482F72BF2738E00113722 /* Assets.xcassets in Resources */,
 			);
