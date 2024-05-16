@@ -5,8 +5,6 @@
  Licensed under MIT License
 */
 
-// In a production app I would attribute this code to its author under the MIT License. Explanation for use of this code: https://www.youtube.com/watch?v=KhGyiOk3Yzk&t=306s
-
 import SwiftUI
 
 struct CacheAsyncImage<Content>: View where Content: View {
