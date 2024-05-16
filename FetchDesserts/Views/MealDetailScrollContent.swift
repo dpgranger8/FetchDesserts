@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import YouTubePlayerKit
 
 struct MealDetailScrollContent: View {
     //MARK: Properties
@@ -28,16 +29,20 @@ struct MealDetailScrollContent: View {
                     }
                 }
             } else {
-                LazyVStack(alignment: .leading) {
+                VStack {
                     TitleHeader
                         .padding(.bottom, spacing / 2)
-                    Group {
-                        RecipeTable
-                        Instructions
+                    LazyVStack(alignment: .leading) {
+                        Group {
+                            RecipeTable
+                            VideoSection
+                            Instructions
+                        }
+                        .padding(.bottom, spacing / 2)
                     }
+                    .padding(.bottom, spacing * 4)
                     .padding(.horizontal, spacing)
                 }
-                .padding(.bottom, spacing * 4)
             }
         }
         .background(specialBackground)
@@ -90,48 +95,80 @@ struct MealDetailScrollContent: View {
     @ViewBuilder
     private var Instructions: some View {
         if let instructions = vm.mealDetail?.strInstructions {
-            Header("Directions")
-            Text(instructions)
+            LeadingVStack {
+                Header("Directions")
+                Text(instructions)
+            }
         }
     }
     
     @ViewBuilder
     private var RecipeTable: some View {
         if let items = vm.mealDetail?.ingredientsAndMeasures() {
-            Header("Ingredients")
-            VStack(spacing: 0) {
-                HStack(alignment: .top) {
-                    Text("INGREDIENT")
-                    Spacer()
-                    Text("AMOUNT")
-                }
-                .padding(.bottom, 5)
-                .font(.caption2)
-                .fontWeight(.semibold)
-                ForEach(items.indices, id: \.self) { index in
-                    ZStack {
-                        if index % 2 == 0 {
-                            Rectangle()
-                                .fill(lightBlue.gradient)
-                                .padding(.horizontal, -15)
-                        }
-                        HStack {
-                            Text(items[index].ingredient)
-                            Spacer()
-                            Text(items[index].measure)
-                        }
-                        .font(.subheadline)
+            LeadingVStack {
+                Header("Recipe")
+                VStack(spacing: 0) {
+                    HStack(alignment: .top) {
+                        Text("INGREDIENT")
+                        Spacer()
+                        Text("AMOUNT")
                     }
-                    .frame(height: 30)
+                    .padding(.bottom, 5)
+                    .font(.caption2)
+                    .fontWeight(.semibold)
+                    ForEach(items.indices, id: \.self) { index in
+                        ZStack {
+                            if index % 2 == 0 {
+                                Rectangle()
+                                    .fill(lightBlue.gradient)
+                                    .padding(.horizontal, -15)
+                            }
+                            HStack {
+                                Text(items[index].ingredient)
+                                Spacer()
+                                Text(items[index].measure)
+                            }
+                            .font(.subheadline)
+                        }
+                        .frame(height: 30)
+                    }
+                }
+                .padding(.horizontal, spacing)
+                .padding(.vertical, spacing / 2)
+                .background {
+                    RoundedRectangle(cornerRadius: Statics.rectangleRadius / 2)
+                        .fill(.quinary)
                 }
             }
-            .padding(.horizontal, spacing)
-            .padding(.vertical, spacing / 2)
-            .background {
-                RoundedRectangle(cornerRadius: Statics.rectangleRadius / 2)
-                    .fill(.quinary)
+        }
+    }
+    
+    @ViewBuilder
+    private var VideoSection: some View {
+        if let urlString = vm.mealDetail?.strYoutube {
+            LeadingVStack {
+                Header("Video")
+                YouTubePlayerView(.init(source: .url(urlString))) { state in
+                    switch state {
+                    case .idle:
+                        ProgressView()
+                    case .ready:
+                        EmptyView()
+                    case .error(_):
+                        EmptyView()
+                    }
+                }
+                .frame(height: 300)
             }
-            .padding(.bottom, spacing / 2)
+        }
+    }
+}
+
+struct LeadingVStack<Content: View>: View {
+    @ViewBuilder let content: Content
+    var body: some View {
+        VStack(alignment: .leading) {
+            content
         }
     }
 }

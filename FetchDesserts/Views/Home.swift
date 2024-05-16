@@ -30,7 +30,7 @@ struct Home: View {
             } else {
                 AlphabetSidebarViewWithDrag(listView: ScrollView {
                     Text("Dave's Desserts")
-                        .font(.custom("SignPainter", size: 60).bold())
+                        .signPainter()
                         .padding(.top, spacing)
                     ItemGrid
                         .padding([.vertical, .bottom], spacing)
@@ -53,11 +53,8 @@ struct Home: View {
                         .allowsHitTesting(coordinator.hideLayer)
                 }
                 //MARK: End of code written by Balaji Venkatesh for smooth detail zoom animation
-                .background(Statics.backgroundGray)
+                .background(.background)
             }
-        }
-        .refreshable {
-            await getDesserts()
         }
         .task {
             await getDesserts()
@@ -66,9 +63,6 @@ struct Home: View {
     
     //MARK: Functions
     func getDesserts() async {
-        withAnimation {
-            vm.resetValues()
-        }
         await Network.shared.getDesserts(completion: { result in
             switch result {
             case .success(let response):

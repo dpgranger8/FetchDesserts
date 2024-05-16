@@ -16,6 +16,7 @@
 		7E4C551F2BF43C300061A11E /* MealDetailScrollContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4C551E2BF43C300061A11E /* MealDetailScrollContent.swift */; };
 		7E4C55222BF43FA90061A11E /* MealDetailVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4C55212BF43FA90061A11E /* MealDetailVM.swift */; };
 		7E4C55242BF442300061A11E /* UnavailableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4C55232BF442300061A11E /* UnavailableView.swift */; };
+		7E7442B62BF568E2002A748C /* YouTubePlayerKit in Frameworks */ = {isa = PBXBuildFile; productRef = 7E7442B52BF568E2002A748C /* YouTubePlayerKit */; };
 		7E9482F32BF2738C00113722 /* FetchDessertsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9482F22BF2738C00113722 /* FetchDessertsApp.swift */; };
 		7E9482F72BF2738E00113722 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E9482F62BF2738E00113722 /* Assets.xcassets */; };
 		7E9482FA2BF2738E00113722 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E9482F92BF2738E00113722 /* Preview Assets.xcassets */; };
@@ -56,6 +57,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7E7442B62BF568E2002A748C /* YouTubePlayerKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -176,6 +178,9 @@
 			dependencies = (
 			);
 			name = FetchDesserts;
+			packageProductDependencies = (
+				7E7442B52BF568E2002A748C /* YouTubePlayerKit */,
+			);
 			productName = FetchDesserts;
 			productReference = 7E9482EF2BF2738C00113722 /* FetchDesserts.app */;
 			productType = "com.apple.product-type.application";
@@ -204,6 +209,9 @@
 				Base,
 			);
 			mainGroup = 7E9482E62BF2738C00113722;
+			packageReferences = (
+				7E7442B42BF568E2002A748C /* XCRemoteSwiftPackageReference "YouTubePlayerKit" */,
+			);
 			productRefGroup = 7E9482F02BF2738C00113722 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -383,11 +391,14 @@
 				DEVELOPMENT_TEAM = P37BL29UZP;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Dave's Desserts";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.food-and-drink";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -412,11 +423,14 @@
 				DEVELOPMENT_TEAM = P37BL29UZP;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Dave's Desserts";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.food-and-drink";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -452,6 +466,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		7E7442B42BF568E2002A748C /* XCRemoteSwiftPackageReference "YouTubePlayerKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SvenTiigi/YouTubePlayerKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.8.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		7E7442B52BF568E2002A748C /* YouTubePlayerKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7E7442B42BF568E2002A748C /* XCRemoteSwiftPackageReference "YouTubePlayerKit" */;
+			productName = YouTubePlayerKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 7E9482E72BF2738C00113722 /* Project object */;
 }

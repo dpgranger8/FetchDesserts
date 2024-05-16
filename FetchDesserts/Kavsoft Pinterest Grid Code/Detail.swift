@@ -67,7 +67,7 @@ struct Detail: View {
                 }
                 
                 /// Hero Kinda View
-                //MARK: I spliced my MealItem view here to make zoom animation work
+                //MARK: I spliced my MealItem view here to make the zoom animation work
                 MealItem(meal: meal, isPreview: false)
                     .allowsHitTesting(false)
                     .frame(
@@ -85,6 +85,7 @@ struct Detail: View {
             }
         }
         .ignoresSafeArea()
+        .backgroundStyle(.background)
     }
     
     /// Scroll Content
