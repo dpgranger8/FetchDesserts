@@ -105,13 +105,16 @@ struct Detail: View {
             Spacer(minLength: 0)
             
             if coordinator.hideLayer {
-                Button(action: { coordinator.toogleView(show: false, frame: .zero, meal: meal) }, label: {
+                Button {
+                    coordinator.toggleView(show: false, frame: .zero, meal: meal)
+                } label: {
                     Image(systemName: "xmark.circle.fill")
                         .font(.title)
                         .foregroundStyle(Color.primary, .bar)
                         .padding(10)
                         .contentShape(.rect)
-                })
+                        .imageScale(.large)
+                }
                 .transition(.asymmetric(insertion: .opacity, removal: .identity))
             }
         }

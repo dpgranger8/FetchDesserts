@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-@Observable
-class HomeScreenVM {
-    var meals: [Meal] = []
+class HomeScreenVM: ObservableObject {
+    static var shared = HomeScreenVM()
+    @Published var meals: [Meal] = []
     var mealSelection: Meal?
     var error: String?
 }

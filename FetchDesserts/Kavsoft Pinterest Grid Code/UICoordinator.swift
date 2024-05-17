@@ -31,7 +31,7 @@ class UICoordinator {
         animationLayer = image
     }
     
-    func toogleView(show: Bool, frame: CGRect, meal: Meal) {
+    func toggleView(show: Bool, frame: CGRect, meal: Meal) {
         if show {
             selectedMeal = meal
             /// Storing View's Rect

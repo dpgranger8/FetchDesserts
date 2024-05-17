@@ -13,9 +13,9 @@ struct MealDetailScrollContent: View {
     @Environment(\.colorScheme) var colorScheme
     var meal: Meal
     @State var vm = MealDetailVM()
+    @State var showWebViewSheet: Bool = false
     let spacing: CGFloat = 15
     let lightBlue: Color = .blue.opacity(0.2)
-    @State var showWebViewSheet: Bool = false
     
     //MARK: UI
     var body: some View {
@@ -56,12 +56,16 @@ struct MealDetailScrollContent: View {
         await Network.shared.getMealDetail(id: meal.idMeal, completion: { result in
             switch result {
             case .success(let response):
-                withAnimation {
-                    vm.mealDetail = response
+                DispatchQueue.main.async {
+                    withAnimation {
+                        vm.mealDetail = response
+                    }
                 }
             case .failure(let error):
-                withAnimation {
-                    vm.error = error.localizedDescription
+                DispatchQueue.main.async {
+                    withAnimation {
+                        vm.error = error.localizedDescription
+                    }
                 }
             }
         })

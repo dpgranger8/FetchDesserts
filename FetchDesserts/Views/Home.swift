@@ -14,7 +14,8 @@ struct Home: View {
     var coordinator: UICoordinator = .init()
     
     //MARK: Properties
-    @State var vm = HomeScreenVM()
+    @StateObject var vm = HomeScreenVM.shared
+    @StateObject var searchVM = SearchViewModel.shared
     let alphabet = (97...122).map({String(UnicodeScalar($0))})
     let spacing: CGFloat = 20
     
@@ -28,31 +29,20 @@ struct Home: View {
                     }
                 }
             } else {
-                AlphabetSidebarViewWithDrag(listView: ScrollView {
-                    Text("Dave's Desserts")
-                        .signPainter()
-                        .padding(.top, spacing)
-                    ItemGrid
-                        .padding([.vertical, .bottom], spacing)
-                        .background(ScrollViewExtractor {
-                            coordinator.scrollView = $0
-                        })
-                    //TODO: sometimes dragging on the alphabet sidebar while images are loading causes an image load failure
-                }.scrollIndicators(.hidden), lookup: { letter in
-                    vm.meals.first { $0.strMeal.prefix(1).lowercased() == letter }
-                }, alphabetFiltered: alphabet.filter { letter in
-                    vm.meals.contains { $0.strMeal.prefix(1).lowercased() == letter }
-                })
-                //MARK: Start of code written by Balaji Venkatesh for smooth detail zoom animation https://www.youtube.com/watch?v=fBCu7rM5Vkw
+                VStack(spacing: 0) {
+                    MainContent
+                    if searchVM.viewState != .loading {
+                        SearchBar(text: $searchVM.searchTerm)
+                    }
+                }
+                .animation(.default, value: searchVM.viewState)
                 .opacity(coordinator.hideRootView ? 0 : 1)
-                .scrollDisabled(coordinator.hideRootView)
                 .allowsHitTesting(!coordinator.hideRootView)
                 .overlay {
                     Detail()
                         .environment(coordinator)
                         .allowsHitTesting(coordinator.hideLayer)
                 }
-                //MARK: End of code written by Balaji Venkatesh for smooth detail zoom animation
                 .background(.background)
             }
         }
@@ -66,16 +56,21 @@ struct Home: View {
         await Network.shared.getDesserts(completion: { result in
             switch result {
             case .success(let response):
-                withAnimation {
-                    vm.meals = response.meals.sorted { meal1, meal2 in
-                        meal1.strMeal < meal2.strMeal //sort desserts by alphabetical order
-                    }.filter { meal in
-                        meal.strMeal != "" || meal.idMeal != "" //filter out any possible empty values
+                DispatchQueue.main.async {
+                    withAnimation {
+                        vm.meals = response.meals.sorted { meal1, meal2 in
+                            meal1.strMeal < meal2.strMeal //sort desserts by alphabetical order
+                        }.filter { meal in
+                            meal.strMeal != "" || meal.idMeal != "" //filter out any possible empty values
+                        }
+                        searchVM.onAppear()
                     }
                 }
             case .failure(let error):
-                withAnimation {
-                    vm.error = error.localizedDescription
+                DispatchQueue.main.async {
+                    withAnimation {
+                        vm.error = error.localizedDescription
+                    }
                 }
             }
         })
@@ -83,12 +78,47 @@ struct Home: View {
     
     //MARK: Subviews
     @ViewBuilder
-    private var ItemGrid: some View {
+    private var MainContent: some View {
+        switch searchVM.viewState {
+        case .loading:
+            EmptyView()
+            
+        case .loaded(let items):
+            AlphabetSidebarViewWithDrag(listView: ScrollView {
+                Text("Dave's Desserts")
+                    .signPainter()
+                    .padding(.top, spacing)
+                ItemGrid(searchResults: items)
+                    .padding([.vertical, .bottom], spacing)
+                    .background(ScrollViewExtractor {
+                        coordinator.scrollView = $0
+                    })
+                
+                //TODO: sometimes dragging on the alphabet sidebar while images are loading causes an image load failure
+            }.scrollIndicators(.hidden).scrollDismissesKeyboard(.immediately), lookup: { letter in
+                items.first { $0.strMeal.prefix(1).lowercased() == letter }
+            }, alphabetFiltered: alphabet.filter { letter in
+                items.contains { $0.strMeal.prefix(1).lowercased() == letter }
+            })
+            .scrollDisabled(coordinator.hideRootView)
+            
+        case .empty:
+            VStack(spacing: 0) {
+                Text("No search results found")
+                    .multilineTextAlignment(.center)
+                    .frame(maxHeight: .infinity)
+                    .padding()
+            }
+        }
+    }
+    
+    @ViewBuilder
+    func ItemGrid(searchResults: [Meal]) -> some View {
         LazyVGrid(columns: [
             GridItem(.adaptive(minimum: 150, maximum: 160), spacing: spacing),
             GridItem(.adaptive(minimum: 150, maximum: 160), spacing: spacing)
         ], alignment: .center, spacing: spacing) {
-            ForEach(vm.meals, id: \.self) { meal in
+            ForEach(searchResults, id: \.self) { meal in
                 CardView(meal)
             }
         }
@@ -101,7 +131,7 @@ struct Home: View {
             let frame = $0.frame(in: .global)
             
             Button {
-                coordinator.toogleView(show: true, frame: frame, meal: meal)
+                coordinator.toggleView(show: true, frame: frame, meal: meal)
             } label: {
                 MealItem(meal: meal, isPreview: true)
             }
