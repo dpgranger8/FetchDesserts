@@ -15,6 +15,7 @@ struct MealDetailScrollContent: View {
     @State var vm = MealDetailVM()
     let spacing: CGFloat = 15
     let lightBlue: Color = .blue.opacity(0.2)
+    @State var showWebViewSheet: Bool = false
     
     //MARK: UI
     var body: some View {
@@ -166,7 +167,15 @@ struct MealDetailScrollContent: View {
         if let source = vm.mealDetail?.strSource, let url = URL(string: source) {
             LeadingVStack {
                 Header("Learn More")
-                Link(source, destination: url)
+                Button {
+                    showWebViewSheet.toggle()
+                } label: {
+                    Text(source)
+                        .foregroundStyle(.blue)
+                }
+            }
+            .sheet(isPresented: $showWebViewSheet) {
+                SafariView(url: url)
             }
         }
     }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7E0D247F2BF71DE900ECD898 /* SafariView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E0D247E2BF71DE900ECD898 /* SafariView.swift */; };
 		7E4C550C2BF4073A0061A11E /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4C550B2BF4073A0061A11E /* Models.swift */; };
 		7E4C550E2BF4083D0061A11E /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4C550D2BF4083D0061A11E /* View+Extensions.swift */; };
 		7E4C55102BF408430061A11E /* UICoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4C550F2BF408430061A11E /* UICoordinator.swift */; };
@@ -32,6 +33,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7E0D247E2BF71DE900ECD898 /* SafariView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariView.swift; sourceTree = "<group>"; };
 		7E4C550B2BF4073A0061A11E /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		7E4C550D2BF4083D0061A11E /* View+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
 		7E4C550F2BF408430061A11E /* UICoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UICoordinator.swift; sourceTree = "<group>"; };
@@ -135,6 +137,7 @@
 				7E4C55122BF408620061A11E /* Home.swift */,
 				7E4C551E2BF43C300061A11E /* MealDetailScrollContent.swift */,
 				7E9483102BF32AB100113722 /* MealItem.swift */,
+				7E0D247E2BF71DE900ECD898 /* SafariView.swift */,
 				7E4C55232BF442300061A11E /* UnavailableView.swift */,
 			);
 			path = Views;
@@ -258,6 +261,7 @@
 				7E9483012BF273F000113722 /* Network.swift in Sources */,
 				7E4C550C2BF4073A0061A11E /* Models.swift in Sources */,
 				7E4C551D2BF43B940061A11E /* HomeVM.swift in Sources */,
+				7E0D247F2BF71DE900ECD898 /* SafariView.swift in Sources */,
 				7E9483092BF30C4300113722 /* CacheAsyncImage.swift in Sources */,
 				7E7F16782BF6E0F000E971C3 /* CustomLoad.swift in Sources */,
 				7E4C550E2BF4083D0061A11E /* View+Extensions.swift in Sources */,
