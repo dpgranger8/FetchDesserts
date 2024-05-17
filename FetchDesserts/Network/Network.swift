@@ -52,6 +52,7 @@ class Network {
             let responseObject = try decoder.decode(DessertsResponse.self, from: data)
             completion(.success(responseObject))
         } catch let error {
+            print(error.localizedDescription)
             completion(.failure(error))
         }
     }
@@ -60,6 +61,7 @@ class Network {
         var request = URLRequest(url: URL(string: Endpoint.mealDetail.rawValue + id)!)
         request.httpMethod = "GET"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        print(id)
         
         do {
             let (data, response) = try await session.data(for: request)
@@ -76,7 +78,10 @@ class Network {
             let responseObject = try decoder.decode(MealDetailResponse.self, from: data)
             completion(.success(responseObject.meals[0]))
         } catch let error {
+            print(error.localizedDescription)
             completion(.failure(error))
         }
     }
 }
+
+//chocolate gateau, bakewell, apple frangipan

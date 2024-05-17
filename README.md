@@ -16,9 +16,6 @@ Fetch.com coding challenge solution in SwiftUI. It allows users to browse desser
 
 Implementing the zoom animation when tapping on a dessert card came with some various design challenges and drawbacks. I understood this was not required but I wanted to try it out of curiosity. On the home screen I was essentially forced to dispose of the usual navigation bar and accompanying code because it was causing the animation not to work properly.
 
-Another challenge I faced was the decision whether or not to call each meal detail separately or cache all 64 item details and filter the results. In a production app with thousands of items it would certainly make more sense to fetch each image and detail just in time as the user views them.
-
-In the app requirements we are instructed to filter out any null or empty values before displaying them. I did not find a way to batch requests to this specific API, and sending 64 meal detail requests in a loop to determine which meals had data didn't sound like a super efficient use of the network. Instead of this approach I chose to fetch each meal detail individually upon tap. The drawback of this approach is that some meal items do not have any detail coming back from the API. I chose to use a ContentUnavailableView to show the user that those desserts have no data.
 ## Acknowledgements
 
  - [Balaji Venkatesh - SwiftUI Pinterest Grid Animation.](https://www.youtube.com/watch?v=fBCu7rM5Vkw) Used for smooth zoom animation
