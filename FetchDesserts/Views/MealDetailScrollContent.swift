@@ -34,6 +34,7 @@ struct MealDetailScrollContent: View {
                             RecipeTable
                             VideoSection
                             Instructions
+                            LearnMore
                         }
                         .padding(.bottom, spacing / 2)
                     }
@@ -121,7 +122,7 @@ struct MealDetailScrollContent: View {
                                     .padding(.horizontal, -15)
                             }
                             HStack {
-                                Text(items[index].ingredient)
+                                Text(items[index].ingredient.capitalized)
                                 Spacer()
                                 Text(items[index].measure)
                             }
@@ -156,6 +157,16 @@ struct MealDetailScrollContent: View {
                     }
                 }
                 .frame(height: 300)
+            }
+        }
+    }
+    
+    @ViewBuilder
+    private var LearnMore: some View {
+        if let source = vm.mealDetail?.strSource, let url = URL(string: source) {
+            LeadingVStack {
+                Header("Learn More")
+                Link(source, destination: url)
             }
         }
     }
