@@ -18,6 +18,7 @@
 		7E4C55242BF442300061A11E /* UnavailableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4C55232BF442300061A11E /* UnavailableView.swift */; };
 		7E7442B62BF568E2002A748C /* YouTubePlayerKit in Frameworks */ = {isa = PBXBuildFile; productRef = 7E7442B52BF568E2002A748C /* YouTubePlayerKit */; };
 		7E7442B82BF5ABEA002A748C /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 7E7442B72BF5ABEA002A748C /* README.md */; };
+		7E7F16782BF6E0F000E971C3 /* CustomLoad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7F16772BF6E0F000E971C3 /* CustomLoad.swift */; };
 		7E9482F32BF2738C00113722 /* FetchDessertsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9482F22BF2738C00113722 /* FetchDessertsApp.swift */; };
 		7E9482F72BF2738E00113722 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E9482F62BF2738E00113722 /* Assets.xcassets */; };
 		7E9482FA2BF2738E00113722 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E9482F92BF2738E00113722 /* Preview Assets.xcassets */; };
@@ -41,6 +42,7 @@
 		7E4C55212BF43FA90061A11E /* MealDetailVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealDetailVM.swift; sourceTree = "<group>"; };
 		7E4C55232BF442300061A11E /* UnavailableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnavailableView.swift; sourceTree = "<group>"; };
 		7E7442B72BF5ABEA002A748C /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		7E7F16772BF6E0F000E971C3 /* CustomLoad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLoad.swift; sourceTree = "<group>"; };
 		7E9482EF2BF2738C00113722 /* FetchDesserts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FetchDesserts.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E9482F22BF2738C00113722 /* FetchDessertsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchDessertsApp.swift; sourceTree = "<group>"; };
 		7E9482F62BF2738E00113722 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -129,6 +131,7 @@
 			children = (
 				7E9483042BF2EB1C00113722 /* AlphabetSidebarWithDrag.swift */,
 				7E9483082BF30C4300113722 /* CacheAsyncImage.swift */,
+				7E7F16772BF6E0F000E971C3 /* CustomLoad.swift */,
 				7E4C55122BF408620061A11E /* Home.swift */,
 				7E4C551E2BF43C300061A11E /* MealDetailScrollContent.swift */,
 				7E9483102BF32AB100113722 /* MealItem.swift */,
@@ -256,6 +259,7 @@
 				7E4C550C2BF4073A0061A11E /* Models.swift in Sources */,
 				7E4C551D2BF43B940061A11E /* HomeVM.swift in Sources */,
 				7E9483092BF30C4300113722 /* CacheAsyncImage.swift in Sources */,
+				7E7F16782BF6E0F000E971C3 /* CustomLoad.swift in Sources */,
 				7E4C550E2BF4083D0061A11E /* View+Extensions.swift in Sources */,
 				7E4C55102BF408430061A11E /* UICoordinator.swift in Sources */,
 				7E9483112BF32AB100113722 /* MealItem.swift in Sources */,

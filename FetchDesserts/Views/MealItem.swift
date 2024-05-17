@@ -16,20 +16,25 @@ struct MealItem: View {
             CacheAsyncImage(url: URL(string: meal.strMealThumb + (isPreview ? "/preview" : ""))!, transaction: .init(animation: .default)) { phase in
                 switch phase {
                 case .failure:
-                    Placeholder {
-                        Image(systemName: "photo")
-                            .font(.largeTitle)
-                            .imageScale(.large)
-                            .scaleEffect(1.5)
-                    }
+                    TopHalf(isPreview: isPreview)
+                        .foregroundStyle(Statics.specialGray)
+                        .overlay {
+                            Image(systemName: "photo")
+                                .font(.largeTitle)
+                                .imageScale(.large)
+                                .scaleEffect(1.5)
+                        }
                 case .success(let image):
                     image
                         .resizable()
                         .clipShape(UnevenRoundedRectangle(topLeadingRadius: (isPreview ? Statics.rectangleRadius : 0), bottomLeadingRadius: 0, bottomTrailingRadius: 0, topTrailingRadius: (isPreview ? Statics.rectangleRadius : 0)))
                 default:
-                    Placeholder {
-                        ProgressView()
-                    }
+                    TopHalf(isPreview: isPreview)
+                        .foregroundStyle(.gray)
+                        .mask {
+                            CustomLoad()
+                                .scaleEffect(isPreview ? 0.5 : 1.5)
+                        }
                 }
             }
             .aspectRatio(contentMode: .fit)
@@ -56,14 +61,14 @@ struct MealItem: View {
     }
 }
 
-struct Placeholder<Content: View>: View {
-    @ViewBuilder let content: Content
+struct TopHalf: View {
+    var isPreview: Bool
     
     var body: some View {
-        UnevenRoundedRectangle(topLeadingRadius: Statics.rectangleRadius, bottomLeadingRadius: 0, bottomTrailingRadius: 0, topTrailingRadius: Statics.rectangleRadius)
-            .foregroundStyle(Statics.backgroundGray)
-            .overlay {
-                content
-            }
+        UnevenRoundedRectangle(topLeadingRadius: (isPreview ? Statics.rectangleRadius : 0), bottomLeadingRadius: 0, bottomTrailingRadius: 0, topTrailingRadius: (isPreview ? Statics.rectangleRadius : 0))
     }
+}
+
+#Preview {
+    MealItem(meal: Statics.dummyMeal, isPreview: true)
 }

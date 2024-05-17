@@ -14,9 +14,6 @@ struct MealDetailScrollContent: View {
     var meal: Meal
     @State var vm = MealDetailVM()
     let spacing: CGFloat = 15
-    var specialBackground: Color {
-        colorScheme == .dark ? Statics.backgroundGray : Color(uiColor: .systemGroupedBackground)
-    }
     let lightBlue: Color = .blue.opacity(0.2)
     
     //MARK: UI
@@ -45,7 +42,7 @@ struct MealDetailScrollContent: View {
                 }
             }
         }
-        .background(specialBackground)
+        .background(colorScheme == .dark ? Statics.specialGray : Color(uiColor: .systemGroupedBackground))
         .task {
             await getMealDetail()
         }
@@ -174,5 +171,5 @@ struct LeadingVStack<Content: View>: View {
 }
 
 #Preview {
-    MealDetailScrollContent(meal: Meal(strMeal: "Apple & Blackberry Crumble", strMealThumb: "https://www.themealdb.com/images/media/meals/xvsurr1511719182.jpg", idMeal: "52893"))
+    MealDetailScrollContent(meal: Statics.dummyMeal)
 }
