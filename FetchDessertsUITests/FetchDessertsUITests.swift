@@ -21,26 +21,22 @@ final class FetchDessertsUITests: XCTestCase {
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
-
-    func testExample() throws {
-        // UI tests must launch the application that they test.
+    
+    // Naming convention in use: test_unitOfWork_stateUnderTest_expectedBehavior
+    // Use Given, When, Then as the test structure, alternatively use Arrange, Act, Assert
+    
+    func test_button_showsMealDetail() {
         let app = XCUIApplication()
         app.launch()
-
-        testDetailViewShows(app: app)
         
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-    
-    func testDetailViewShows(app: XCUIApplication) {
         let cardButton = app.buttons["Apple Frangipan Tart"]
-        let mealItem = app.otherElements["MealItem"]
+        let mealDetail = app.otherElements["MealDetail"]
         
         XCTAssert(cardButton.waitForExistence(timeout: 60))
         cardButton.tap()
         
         // Assert that the mealItem element exists after tapping the cardButton
-        XCTAssertTrue(mealItem.exists, "Meal item should be shown after tapping CardButton")
+        XCTAssertTrue(mealDetail.exists, "Meal detail should be shown after tapping CardButton")
     }
 
     func testLaunchPerformance() throws {

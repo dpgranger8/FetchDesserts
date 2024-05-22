@@ -45,6 +45,7 @@ struct MealDetailScrollContent: View {
                 }
             }
         }
+        .accessibilityIdentifier("MealDetail")
         .background(colorScheme == .dark ? Statics.specialGray : Color(uiColor: .systemGroupedBackground))
         .task {
             await getMealDetail()

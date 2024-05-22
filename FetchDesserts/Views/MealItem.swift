@@ -41,7 +41,6 @@ struct MealItem: View {
             BottomBar
                 .if(!isPreview) {$0.hidden()}
         }
-        .accessibilityIdentifier("MealItem")
     }
     
     @ViewBuilder
