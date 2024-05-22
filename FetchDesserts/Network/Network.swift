@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 
+@Observable
 class Network {
     enum APIError: Error, LocalizedError {
         case invalidResponse
@@ -28,7 +29,6 @@ class Network {
         case mealDetail = "https://themealdb.com/api/json/v1/1/lookup.php?i="
     }
     
-    static let shared = Network()
     let session = URLSession.shared
     let decoder = JSONDecoder()
     

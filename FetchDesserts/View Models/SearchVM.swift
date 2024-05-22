@@ -23,10 +23,13 @@ enum SearchViewState: Equatable {
 final class SearchViewModel: ObservableObject {
     
     // MARK: - Public properties
-    static var shared: SearchViewModel = SearchViewModel()
     @Published var searchTerm = ""
     @Published var viewState: SearchViewState = .loading
-    @ObservedObject var homeVM = HomeScreenVM.shared
+    @ObservedObject var homeVM: HomeScreenVM
+    
+    init(homeVM: HomeScreenVM) {
+        self.homeVM = homeVM
+    }
     
     // MARK: - Private properties
     private var cancellables = Set<AnyCancellable>()

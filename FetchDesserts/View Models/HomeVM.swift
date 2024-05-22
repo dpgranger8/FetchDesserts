@@ -8,7 +8,6 @@
 import SwiftUI
 
 class HomeScreenVM: ObservableObject {
-    static var shared = HomeScreenVM()
     @Published var meals: [Meal] = []
     var mealSelection: Meal?
     var error: String?

@@ -14,10 +14,16 @@ struct Home: View {
     var coordinator: UICoordinator = .init()
     
     //MARK: Properties
-    @StateObject var vm = HomeScreenVM.shared
-    @StateObject var searchVM = SearchViewModel.shared
+    @StateObject private var searchVM: SearchViewModel
+    @ObservedObject private var vm: HomeScreenVM
+    @Environment(Network.self) private var network
     let alphabet = (97...122).map({String(UnicodeScalar($0))})
     let spacing: CGFloat = 20
+    
+    init(vm: HomeScreenVM) {
+        _searchVM = StateObject(wrappedValue: SearchViewModel(homeVM: vm))
+        _vm = ObservedObject(wrappedValue: vm)
+    }
     
     //MARK: UI
     var body: some View {
@@ -53,7 +59,7 @@ struct Home: View {
     
     //MARK: Functions
     func getDesserts() async {
-        await Network.shared.getDesserts(completion: { result in
+        await network.getDesserts(completion: { result in
             switch result {
             case .success(let response):
                 DispatchQueue.main.async {
@@ -135,6 +141,7 @@ struct Home: View {
             } label: {
                 MealItem(meal: meal, isPreview: true)
             }
+            .accessibilityIdentifier(meal.strMeal)
         }
         .frame(height: 220)
     }

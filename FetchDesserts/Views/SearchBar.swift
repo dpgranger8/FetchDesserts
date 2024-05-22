@@ -31,11 +31,11 @@ struct SearchBar: View {
                             .limitInputLength(value: $text, length: 30)
                         
                         if !text.isEmpty {
-                            Button(action: {
+                            Button {
                                 withAnimation {
                                     text = ""
                                 }
-                            }) {
+                            } label: {
                                 Image(systemName: "xmark.circle.fill")
                                     .accessibilityLabel("Clear text")
                                     .imageScale(.large)

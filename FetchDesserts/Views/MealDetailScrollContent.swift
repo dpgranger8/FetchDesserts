@@ -11,6 +11,7 @@ import YouTubePlayerKit
 struct MealDetailScrollContent: View {
     //MARK: Properties
     @Environment(\.colorScheme) var colorScheme
+    @Environment(Network.self) private var network
     var meal: Meal
     @State var vm = MealDetailVM()
     @State var showWebViewSheet: Bool = false
@@ -53,7 +54,7 @@ struct MealDetailScrollContent: View {
     //MARK: Functions
     func getMealDetail() async {
         vm.error = nil
-        await Network.shared.getMealDetail(id: meal.idMeal, completion: { result in
+        await network.getMealDetail(id: meal.idMeal, completion: { result in
             switch result {
             case .success(let response):
                 DispatchQueue.main.async {

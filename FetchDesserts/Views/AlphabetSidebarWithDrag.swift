@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct AlphabetSidebarViewWithDrag<Content: View>: View {
-    @Environment(\.colorScheme) var colorScheme
     @GestureState private var dragLocation: CGPoint = .zero
     
     var listView: Content

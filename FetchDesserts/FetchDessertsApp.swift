@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct FetchDessertsApp: App {
+    @StateObject var vm = HomeScreenVM()
+    
     var body: some Scene {
         WindowGroup {
-            Home()
+            Home(vm: vm)
+                .environment(Network())
         }
     }
 }
